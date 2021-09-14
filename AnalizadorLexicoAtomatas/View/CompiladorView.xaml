@@ -1,0 +1,143 @@
+﻿<Window x:Class="AnalizadorLexicoAtomatas.View.CompiladorView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AnalizadorLexicoAtomatas.View"
+          xmlns:vm="clr-namespace:AnalizadorLexicoAtomatas.ViewModels"
+        mc:Ignorable="d"
+        Title="CompiladorView" Height="450" Width="800">
+    <DockPanel>
+        <DockPanel.DataContext>
+            <vm:CompiladorViewModel></vm:CompiladorViewModel>
+        </DockPanel.DataContext>
+        <Label DockPanel.Dock="Top" HorizontalAlignment="Center" Foreground="#000f20" FontSize="25" FontFamily="Consolas" FontWeight="Bold">"Máquina de Turing"</Label>
+        <Label Content="{Binding Error}" Height="25" DockPanel.Dock="Bottom"></Label>
+        <Grid>
+            <Grid.Resources>
+                <Style TargetType="TextBlock">
+                    <Setter Property="Foreground" Value="#214e5f"/>
+                    <Setter Property="FontSize" Value="22"/>
+                    <Setter Property="FontWeight" Value="Bold"/>
+                    <Setter Property="FontFamily" Value="Consolas"/>
+                    <Setter Property="HorizontalAlignment" Value="Center"/>
+
+                </Style>
+                <Style TargetType="TextBox">
+                    <Setter Property="Background" Value="#CCFFffff"/>
+                    <Setter Property="FontSize" Value="19"/>
+                    <Setter Property="FontWeight" Value="Bold"/>
+                    <Setter Property="FontFamily" Value="Consolas"/>
+                    <Setter Property="BorderBrush" Value="White"/>
+
+                </Style>
+                <Style TargetType="DataGrid">
+                    <Setter Property="FontSize" Value="19"/>
+                    <Setter Property="FontWeight" Value="Bold"/>
+                    <Setter Property="FontFamily" Value="Consolas"/>
+                    <Setter Property="BorderBrush" Value="White"/>
+                </Style>
+                <Style TargetType="Button">
+                    <Setter Property="FontSize" Value="18"/>
+                    <Setter Property="FontWeight" Value="Bold"/>
+                    <Setter Property="FontFamily" Value="Consolas"/>
+                    <Setter Property="Height" Value="60"/>
+                    <Setter Property="Width" Value="180"/>
+                    <Setter Property="BorderBrush" Value="White"/>
+
+                </Style>
+            </Grid.Resources>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <DockPanel  Grid.Row="0" Grid.Column="0" Margin="10" Grid.RowSpan="2">
+                <TextBlock DockPanel.Dock="Top">Línea de código</TextBlock>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <TextBox  Text="{Binding SourceCode}" Grid.Row="0">
+                        <TextBox.BitmapEffect>
+                            <DropShadowBitmapEffect Color="Black"></DropShadowBitmapEffect>
+                        </TextBox.BitmapEffect>
+                    </TextBox>
+                    <RichTextBox  Grid.Row="1"></RichTextBox>
+                </Grid>
+               
+                
+            </DockPanel>
+            <DockPanel  Grid.Row="0" Grid.Column="2" Margin="10">
+                <TextBlock DockPanel.Dock="Top" FontSize="18">Analizador léxico</TextBlock>
+                <DataGrid ItemsSource="{Binding lista}">
+                    <DataGrid.BitmapEffect>
+                        <DropShadowBitmapEffect Color="Black"></DropShadowBitmapEffect>
+                    </DataGrid.BitmapEffect>
+                </DataGrid>
+            </DockPanel>
+            <DockPanel  Grid.Row="1" Grid.Column="3" Margin="10">
+                <TextBlock DockPanel.Dock="Top">Resultado</TextBlock>
+                <DataGrid ItemsSource="{Binding listaCompilador}">
+                    <DataGrid.BitmapEffect>
+                        <DropShadowBitmapEffect Color="Black"></DropShadowBitmapEffect>
+                    </DataGrid.BitmapEffect>
+                </DataGrid>
+            </DockPanel>
+            <Grid Grid.Row="0" Grid.Column="1" >
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <Button Grid.Row="0" Background="#77076793" Content="Léxico" FontSize="25" Command="{Binding LexicoCommand}" VerticalAlignment="Center" Height="40">
+                    <Button.BitmapEffect>
+                        <DropShadowBitmapEffect Color="Black"></DropShadowBitmapEffect>
+                    </Button.BitmapEffect>
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="10"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+                <Button Grid.Row="2" Background="#d84a4b" Content="Compilar" FontSize="25" Command="{Binding CompilarCommand}" VerticalAlignment="Center" Height="40">
+                    <Button.BitmapEffect>
+                        <DropShadowBitmapEffect Color="Black"></DropShadowBitmapEffect>
+                    </Button.BitmapEffect>
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="10"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+                <Button Grid.Row="1" Background="ForestGreen" Content="Análisis" FontSize="25"  VerticalAlignment="Center" Height="40">
+                    <Button.BitmapEffect>
+                        <DropShadowBitmapEffect Color="Black"></DropShadowBitmapEffect>
+                    </Button.BitmapEffect>
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="10"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+            </Grid>
+            <DockPanel  Grid.Row="0" Grid.Column="3"  >
+                <TextBlock DockPanel.Dock="Top" FontSize="15">Sintácticos-Semánticos</TextBlock>
+                <DataGrid></DataGrid>
+            </DockPanel>
+            <DockPanel  Grid.Row="1" Grid.Column="2"  >
+                <TextBlock DockPanel.Dock="Top" FontSize="15">Analizador General</TextBlock>
+                <DataGrid></DataGrid>
+            </DockPanel>
+            
+        </Grid>
+    </DockPanel>
+</Window>
