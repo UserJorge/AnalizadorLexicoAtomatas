@@ -1,23 +1,22 @@
-# AnalizadorLexicoAtomatas
-Lenguajes y Autómatas 2
+# Lenguajes y Autómatas 2
+## AnalizadorLexicoAtomatas
+### Proyecto Analizador Lexico
 
-Proyecto Analizador Lexico
-
-Jorge Moreno
-Ulises Perez
-Humerto Ramos
-Alejandro Valdés
+-Jorge Moreno 
+-Ulises Perez
+-Humerto Ramos
+-Alejandro Valdés
 
 Para colocar una sentancia y calcular el resultado.
 
 primero colocas el texto como el siguiente 
-
+```
 SUM(8,2);
-
+```
 para mostrar el resultado de la operación primero se escanea el boton de léxico y después compilar.
 *hasta ahora solo tenemos la suma simple como operacion que genera un resultado.
 
-Control de errores:
+## Control de errores:
 
 -si no hay parentesis de apertura o cerradura al final se generará un error.
 -si no hay punto y coma al finalizar (;)
