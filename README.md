@@ -2,10 +2,10 @@
 ## AnalizadorLexicoAtomatas
 ### Proyecto Analizador Lexico
 
--Jorge Moreno 
--Ulises Perez
--Humerto Ramos
--Alejandro Valdés
+- Jorge Moreno 
+- Ulises Perez
+- Humerto Ramos
+- Alejandro Valdés
 
 Para colocar una sentancia y calcular el resultado.
 
