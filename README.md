@@ -1,6 +1,6 @@
 # Lenguajes y Autómatas 2
-## AnalizadorLexicoAtomatas
-### Proyecto Analizador Lexico
+## Nombre del Proyecto: AnalizadorLexicoAutomatas
+### Proyecto Analizador Léxico
 
 - Jorge Moreno 
 - Ulises Perez
@@ -18,10 +18,10 @@ para mostrar el resultado de la operación primero se escanea el boton de léxic
 
 ## Control de errores:
 
--si no hay parentesis de apertura o cerradura al final se generará un error.
--si no hay punto y coma al finalizar (;)
--Los datos son del 0 al 9 no admitiendo numeros negativos,
--(en el futuro soportará la resta)
+- si no hay parentesis de apertura o cerradura al final se generará un error.
+- si no hay punto y coma al finalizar (;)
+- Los datos son del 0 al 9 no admitiendo numeros negativos,
+- (en el futuro soportará la resta)
 
-si la sentancia no está correctamente escrita en algunos casos no se mostrará el error y 
+Si la sentancia no está correctamente escrita en algunos casos no se mostrará el error y 
 no cargará los tokens ya que no cumple con una sentencia correcta.
