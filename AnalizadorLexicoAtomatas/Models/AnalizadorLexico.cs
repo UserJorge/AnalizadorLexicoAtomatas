@@ -12,6 +12,7 @@ namespace AnalizadorLexicoAtomatas.Model
 {
     public class AnalizadorLexico
     {
+        //prueba 1
         // En el método de PreLectura está hecho con el proósito de eliminar los espacios en blanco, comentarios en el código
         //y demás infromación innecesaria para poder hacer un programa fuente más cercano a las instrucciones.
        // string espacio = "[' ']";
