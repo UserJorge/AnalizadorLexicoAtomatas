@@ -51,10 +51,7 @@ namespace AnalizadorLexicoAtomatas.Model
         public List<EstructuraLexica> Identificador()
         {
             List<EstructuraLexica> ListaIdent = new List<EstructuraLexica>();
-            
-                
-           
-                
+ 
                 //se crea un nuevo array con la longitud de la propiedad auxiliar
                 //donde reside el codigo producto del metodo prelectura
                 char[] array = new char[Auxiliar.Length];
@@ -92,7 +89,7 @@ namespace AnalizadorLexicoAtomatas.Model
                         Extring = "";
                     }
                     // si no entonces envía una interrupción la cual especifica que no se detectaron 
-                    //las palabra reservada como primera mención (esto es importante)
+                    //las palabras reservadas como primera mención (esto es importante)
                     else
                     {
                         throw new ArgumentException("Interrupción, ninguna coincidencia en palabras reservadas");
@@ -162,7 +159,7 @@ namespace AnalizadorLexicoAtomatas.Model
                     } 
                 }
             
-              //al final se regresa 
+              //al final se regresa la lista con las modificaciones correspondientes
             return ListaIdent;
             
 
