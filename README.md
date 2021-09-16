@@ -4,7 +4,7 @@
 
 - Jorge Moreno 
 - Ulises Perez
-- Humerto Ramos
+- Humberto Ramos
 - Alejandro Elguezabal
 
 Para colocar una sentancia y calcular el resultado.
