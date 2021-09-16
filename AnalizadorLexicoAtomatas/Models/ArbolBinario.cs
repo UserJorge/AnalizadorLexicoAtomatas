@@ -9,11 +9,22 @@ namespace AnalizadorLexicoAtomatas.Models
    public class ArbolBinario
     {
       
+
+            /// <summary>
+            /// Se crea la estructura del nodo
+            /// </summary>
             class Nodo
             {
                 public char info;
                 public Nodo izq, der;
             }
+
+            /// <summary>
+            /// se intancia la raiz de tipo 
+            /// </summary>
+            /// <remarks>
+            /// <c>Insertar</c> es el proceso para insertar un nodo a el arbol binario
+            /// </remarks>
             Nodo raiz;
 
             public ArbolBinario()

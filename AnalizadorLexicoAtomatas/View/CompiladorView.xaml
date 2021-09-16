@@ -138,7 +138,7 @@
                 </Button>
             </Grid>
             <DockPanel  Grid.Row="0" Grid.Column="2"  >
-                <TextBlock DockPanel.Dock="Top" FontSize="15">Sintácticos-Semánticos</TextBlock>
+                <TextBlock DockPanel.Dock="Top" FontSize="15">Sintáctica-Semántica</TextBlock>
                 <DataGrid></DataGrid>
             </DockPanel>
             <DockPanel  Grid.Row="1" Grid.Column="1"  >

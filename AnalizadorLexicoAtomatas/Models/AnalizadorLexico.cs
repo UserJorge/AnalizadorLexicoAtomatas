@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -133,9 +134,9 @@ namespace AnalizadorLexicoAtomatas.Model
                         ListaIdent.Add(new EstructuraLexica { Token = "DELIMITADOR", Lexema = ",", Definicion = "DELIMITADOR COMA", Sintaxis = "FUN(N,N);", Ejemplo = "FUN(N,N);" });
                     }
 
-                    /*
-                     Reconoce el paréntesis de clausura \x29 y lo agg a la lista "ListaIdent"
-                     */
+                    
+                     //Reconoce el paréntesis de clausura \x29 y lo agg a la lista "ListaIdent"
+                     
 
                     if (Regex.IsMatch(array[i].ToString(), @"^(\x29)$"))
                     {
@@ -163,6 +164,17 @@ namespace AnalizadorLexicoAtomatas.Model
             return ListaIdent;
             
 
+        }
+
+        public bool validar(string codigo)
+        {
+            RegexStringValidator validator = new RegexStringValidator(@"");
+            
+            if (Regex.IsMatch(codigo, @"^FUN"))
+            {
+                return true;
+            }
+            else return false;
         }
 
     }

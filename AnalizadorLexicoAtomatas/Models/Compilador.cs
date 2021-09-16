@@ -55,59 +55,6 @@ namespace AnalizadorLexicoAtomatas.Models
                   
                 }
 
-
-                //if (Regex.IsMatch(item.Lexema, @"^(SUM)$"))
-                //    {
-
-                //        Estructuras.Add(new AnalizadorResultado { Estructura = "FUNCIÓN SUMA INICIADA", Detalle = "PALABRA RESERVADA" });
-                //        midCode += "+";
-                //    }
-                //    if (Regex.IsMatch(item.Lexema, @"^(SUB)$"))
-                //    {
-
-                //        Estructuras.Add(new AnalizadorResultado { Estructura = "FUNCIÓN RESTA INICIADA", Detalle = "PALABRA RESERVADA" });
-                //        midCode += "-";
-
-                //    }
-
-
-
-
-
-                    //if (Regex.IsMatch(item.Lexema, @"(\d)") && midCode.ToCharArray()[midCode.Length - 1] == '+')
-                    //{
-
-                    //    Estructuras.Add(new AnalizadorResultado { Estructura = "NUMERO ENT", Detalle = "ENT" });
-
-                    //    resultado += Convert.ToInt32(item.Lexema);
-                    //    if (simbolos[midCode.Length - 1] == '+')
-                    //    {
-                    //        Regex.Replace(midCode, @"(['+'])$", "");
-                    //    }
-                    //}
-                    //if (Regex.IsMatch(item.Lexema, @"(\d)"))
-                    //{
-
-
-                    //    count++;
-                    //    Estructuras.Add(new AnalizadorResultado { Estructura = "NUMERO ENT", Detalle = "ENT" });
-                    //    if (count == 1)
-                    //    {
-                    //        resultado += Convert.ToInt32(item.Lexema);
-
-                    //    }
-                    //    else if (count == 2 | midCode.ToCharArray()[midCode.Length - 1] == '-')
-                    //    {
-                    //        resultado -= Convert.ToInt32(item.Lexema);
-                    //    }
-                    //    if (simbolos[midCode.Length - 1] == '-')
-                    //    {
-                    //        Regex.Replace(midCode, @"(['-'])$", "");
-                    //    }
-
-
-
-                    //}
                     if (item.Lexema.ToString() == ";")
                     {
                         Estructuras.Add(new AnalizadorResultado { Estructura = "RESULTADO: " + resultado.ToString(), Detalle = "ENT" });

@@ -48,7 +48,7 @@ namespace AnalizadorLexicoAtomatas.Model
             set { ejemplo = value; }
         }
 
-        //private int linea;
+        //private in t linea;
 
         //public int Linea
         //{
