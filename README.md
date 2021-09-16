@@ -1,5 +1,5 @@
 # Lenguajes y Autómatas 2
-## Nombre del Proyecto: AnalizadorLexicoAutomatas
+## Nombre del Proyecto: AnalizadorLexicoAutomatas (CalcFun)
 ### Proyecto Analizador Léxico
 
 - Jorge Moreno 
