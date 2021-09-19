@@ -37,7 +37,7 @@ namespace AnalizadorLexicoAtomatas.View
             // Comprobar cuál de los dos textBoxes tiene más líneas
             txtLines.Text = " ";
             for (var i = 1; i <= linIzq; i++)
-                // Indentar el texto a la derecha
+                // Indentar el texto a la derecha 
                 txtLines.Text += i.ToString("0").PadLeft(4) + "\r";
         }
     }

@@ -79,8 +79,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Controller\CompiladorViewModel.cs" />
-    <Compile Include="Controller\PruebaViewModel.cs" />
+    <Compile Include="ViewModels\CompiladorViewModel.cs" />
+    <Compile Include="Models\AnalizadorInterpreteLexico.cs" />
     <Compile Include="Models\AnalizadorLexico.cs" />
     <Compile Include="Models\AnalizadorResultado.cs" />
     <Compile Include="Models\AnalizadorSemantico.cs" />
@@ -93,9 +93,6 @@
     <Compile Include="Models\TablaDeSimbolos.cs" />
     <Compile Include="View\CompiladorView.xaml.cs">
       <DependentUpon>CompiladorView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\PagePruebaLinea.xaml.cs">
-      <DependentUpon>PagePruebaLinea.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -110,10 +107,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="View\CompiladorView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\PagePruebaLinea.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

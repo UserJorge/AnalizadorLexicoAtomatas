@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AnalizadorLexicoAtomatas.Models;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Configuration;
@@ -38,15 +39,16 @@ namespace AnalizadorLexicoAtomatas.Model
             foreach (char item in codigoFuente)
             {
                 //se van a borrar los espacios
-                if (!Regex.IsMatch(item.ToString(), @"(\s+)"))
-                {
+                //if (!Regex.IsMatch(item.ToString(), @"(\s+|(\x3A{1,1})|(\x3D{1,1}))"))
+                //{
                     Auxiliar += item;
-                }
+                //}
               
             }         
         }
         string Extring;
         string LEXC;
+
 
         //en este proceso identifica cada uno de los lexemas ya sea SUM o un paréntesis delimitador, etc..
         public List<EstructuraLexica> Identificador()
@@ -64,11 +66,14 @@ namespace AnalizadorLexicoAtomatas.Model
             {
                 array[i] = Convert.ToChar(Auxiliar[i]);
 
-                if (Regex.IsMatch(array[i].ToString(), @"\b([A-Z]{1,1})\b"))
+                //if (Regex.IsMatch(array[i].ToString(), @"\b([a-z]{1,1}|[A-Z]{1,1}|\x3A{1,1}|\x3D{1,1})\b"))
+                //{
+                if ((Regex.IsMatch(array[i].ToString(), @"\S")))
                 {
                     Extring += array[i].ToString();
                 }
-
+                  
+              
                 //saber si las letras almacenadas representan una palabra reservada
                 if (Extring != null && Extring.Length > 2)
                 {
@@ -97,6 +102,37 @@ namespace AnalizadorLexicoAtomatas.Model
                     }
 
                 }
+                if (!String.IsNullOrWhiteSpace(Extring)&&Extring.Length==1&&Regex.IsMatch(Extring,@"^(a|b|c|d|e|f|g)$"))
+                {
+                    switch (Extring)
+                    {
+                        case "a": ListaIdent.Add(new EstructuraLexica { Token = "VAR", Lexema = "a", Definicion = "VARIABLE", Sintaxis = "TIPO VAR := NUM;", Ejemplo = "FLT a:=2.3F;" }); break;
+                        case "b": ListaIdent.Add(new EstructuraLexica { Token = "VAR", Lexema = "b", Definicion = "VARIABLE", Sintaxis = "TIPO VAR := NUM;", Ejemplo = "INT b:=2;" }); break;
+                        case "c": ListaIdent.Add(new EstructuraLexica { Token = "VAR", Lexema = "c", Definicion = "VARIABLE", Sintaxis = "TIPO VAR := NUM;", Ejemplo = "FLT c:=10.2F;" }); break;
+                        case "d": ListaIdent.Add(new EstructuraLexica { Token = "VAR", Lexema = "d", Definicion = "VARIABLE", Sintaxis = "TIPO VAR := NUM;", Ejemplo = "INT d:=3;" }); break;
+                        case "e": ListaIdent.Add(new EstructuraLexica { Token = "VAR", Lexema = "e", Definicion = "VARIABLE", Sintaxis = "TIPO VAR := NUM;", Ejemplo = "FLT e:=3.5F;" }); break;
+                        case "f": ListaIdent.Add(new EstructuraLexica { Token = "VAR", Lexema = "f", Definicion = "VARIABLE", Sintaxis = "TIPO VAR := NUM;", Ejemplo = "INT f:=3;" }); break;
+                        case "g": ListaIdent.Add(new EstructuraLexica { Token = "VAR", Lexema = "g", Definicion = "VARIABLE", Sintaxis = "TIPO VAR := NUM;", Ejemplo = "FLT g:=3.4F;" }); break;
+                        default: throw new ArgumentException("Interrupación ninguna coincidencia en palabras reservadas");
+
+                    }
+                    Extring = "";
+                }
+                if (!String.IsNullOrWhiteSpace(Extring) && Extring.Length > 1 && Extring==":=")
+                {
+                    switch (Extring)
+                    {
+                        case ":=": ListaIdent.Add(new EstructuraLexica { Token = "ASI", Lexema = ":=", Definicion = "ASIGNACIÓN", Sintaxis = "TIPO VAR := NUM;", Ejemplo = "FLT a:=2.3F;" }); break;
+                    }
+                    Extring = "";
+                }
+                if (String.IsNullOrWhiteSpace(Extring) && Regex.IsMatch(Extring, @"(\d)"))
+                {
+                   
+                       ListaIdent.Add(new EstructuraLexica { Token = "NUM", Lexema = Extring.ToString(), Definicion = "NÚMERO", Sintaxis = "TIPO VAR := NUM;", Ejemplo = "FLT a:=2.3F;" }); 
+                  
+                    Extring = "";
+                }
 
 
                 
@@ -114,10 +150,11 @@ namespace AnalizadorLexicoAtomatas.Model
                         }
                         LEXC = "";
                     }
-                    else if (i == 3 && !Regex.IsMatch(array[i].ToString(), @"^(\x28)$"))
+                    else if (i == 3 && !Regex.IsMatch(array[i].ToString(), @"^(\x28)$")&&ListaIdent.ToArray()[0].Lexema!="INT")
                     {
-                        throw new ArgumentException("Error en el parentesis apertura");
-                    }
+                    throw new ArgumentException("Error en el parentesis apertura");
+
+                }
 
 
                     /*
@@ -149,7 +186,7 @@ namespace AnalizadorLexicoAtomatas.Model
 
                     }
                     //identificar solamente si no hay un paréntesis de clausura
-                    else if (i == Auxiliar.Length - 2 && !Regex.IsMatch(array[Auxiliar.Length - 2].ToString(), @"^(\x29)$"))
+                    else if (i == Auxiliar.Length - 2 && !Regex.IsMatch(array[Auxiliar.Length - 2].ToString(), @"^(\x29)$") && ListaIdent.ToArray()[0].Lexema != "INT")
                     {
                         throw new ArgumentException("parentesis de clausura");
                     }
@@ -165,17 +202,22 @@ namespace AnalizadorLexicoAtomatas.Model
             
 
         }
-
-        public bool validar(string codigo)
+        List<Complete> ListaCompleta = new List<Complete>();
+        public List<Complete> RegresarTokens(string CodeSource)
         {
-            RegexStringValidator validator = new RegexStringValidator(@"");
-            
-            if (Regex.IsMatch(codigo, @"^FUN"))
-            {
-                return true;
-            }
-            else return false;
+           
+
+
+
+
+
+
+
+
+            return ListaCompleta;
+
         }
 
+        
     }
 }
