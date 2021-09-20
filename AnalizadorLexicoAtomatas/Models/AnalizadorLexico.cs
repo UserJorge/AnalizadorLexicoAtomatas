@@ -62,39 +62,45 @@ namespace AnalizadorLexicoAtomatas.Model
 
             //se crea un flujo de datos iterativos en los cuales se analizarán cada uno de los caracteres para ser juntos para formar distintos lexemas
             //ya sean identificadores de funcion, delimitadores, variables, declaraciones, asignaciones, etc..
+            int lineas = 0;
             for (int i = 0; i < Auxiliar.Length; i++)
             {
                 array[i] = Convert.ToChar(Auxiliar[i]);
-
+               
                 //if (Regex.IsMatch(array[i].ToString(), @"\b([a-z]{1,1}|[A-Z]{1,1}|\x3A{1,1}|\x3D{1,1})\b"))
                 //{
                 if ((Regex.IsMatch(array[i].ToString(), @"\S")))
                 {
                     Extring += array[i].ToString();
                 }
+                if ((Regex.IsMatch(array[i].ToString(), @"\r")))
+                {
+                    lineas++;
+                }
+
                 if (Extring != null&&Extring=="IF")
                 {
-                   ListaIdent.Add(new EstructuraLexica { Token = "CONDICIONAL", Lexema = "IF", Definicion = "IF Statement", Sintaxis = "IF(VAR/NUM==VAR/NUM) THEN FUN(VAR,5);ENDIF;", Ejemplo = "IF(VAR/NUM==VAR/NUM) THEN FUN(4,5);ENDIF;" });
+                   ListaIdent.Add(new EstructuraLexica { Token = "CONDICIONAL", Lexema = "IF", Definicion = "IF Statement", Sintaxis = "IF(VAR/NUM==VAR/NUM) THEN FUN(VAR,5);ENDIF;", Ejemplo = "IF(VAR/NUM==VAR/NUM) THEN FUN(4,5);ENDIF;",Linea=lineas+1 });
                     Extring = "";
                 }
                 if (Extring != null && Extring == "THEN")
                 {
-                    ListaIdent.Add(new EstructuraLexica { Token = "ENTONCES", Lexema = "THEN", Definicion = "IF Statement", Sintaxis = "IF(VAR/NUM==VAR/NUM) THEN FUN(VAR,5);ENDIF;", Ejemplo = "IF(VAR/NUM==VAR/NUM) THEN FUN(4,5);ENDIF;" });
+                    ListaIdent.Add(new EstructuraLexica { Token = "ENTONCES", Lexema = "THEN", Definicion = "IF Statement", Sintaxis = "IF(VAR/NUM==VAR/NUM) THEN FUN(VAR,5);ENDIF;", Ejemplo = "IF(VAR/NUM==VAR/NUM) THEN FUN(4,5);ENDIF;", Linea = lineas + 1 });
                     Extring = "";
                 }
                 if (Extring != null && Extring == "ENDIF")
                 {
-                    ListaIdent.Add(new EstructuraLexica { Token = "Termino IF", Lexema = "ENDIF", Definicion = "IF Statement", Sintaxis = "IF(VAR/NUM==VAR/NUM) THEN FUN(VAR,5);ENDIF;", Ejemplo = "IF(VAR/NUM==VAR/NUM) THEN FUN(4,5);ENDIF;" });
+                    ListaIdent.Add(new EstructuraLexica { Token = "Termino IF", Lexema = "ENDIF", Definicion = "IF Statement", Sintaxis = "IF(VAR/NUM==VAR/NUM) THEN FUN(VAR,5);ENDIF;", Ejemplo = "IF(VAR/NUM==VAR/NUM) THEN FUN(4,5);ENDIF;", Linea = lineas + 1 });
                     Extring = "";
                 }
                 if (Extring != null && Extring == "ELSE")
                 {
-                    ListaIdent.Add(new EstructuraLexica { Token = "ELSE", Lexema = "ELSE", Definicion = "IF Statement", Sintaxis = "IF(VAR/NUM==VAR/NUM) THEN FUN(VAR,5);ENDIF;", Ejemplo = "IF(VAR/NUM==VAR/NUM) THEN FUN(4,5);ENDIF;" });
+                    ListaIdent.Add(new EstructuraLexica { Token = "ELSE", Lexema = "ELSE", Definicion = "IF Statement", Sintaxis = "IF(VAR/NUM==VAR/NUM) THEN FUN(VAR,5);ENDIF;", Ejemplo = "IF(VAR/NUM==VAR/NUM) THEN FUN(4,5);ENDIF;", Linea = lineas + 1 });
                     Extring = "";
                 }
                 if (Extring != null && Extring == "ENDELSE")
                 {
-                    ListaIdent.Add(new EstructuraLexica { Token = "Termino ELSE", Lexema = "ENDELSE", Definicion = "IF Statement", Sintaxis = "IF(VAR/NUM==VAR/NUM) THEN FUN(VAR,5);ENDIF ELSE SUB(8,4); ENDELSE;", Ejemplo = "IF(VAR/NUM==VAR/NUM) THEN FUN(VAR,5);ENDIF ELSE SUB(8,4); ENDELSE;" });
+                    ListaIdent.Add(new EstructuraLexica { Token = "Termino ELSE", Lexema = "ENDELSE", Definicion = "IF Statement", Sintaxis = "IF(VAR/NUM==VAR/NUM) THEN FUN(VAR,5);ENDIF ELSE SUB(8,4); ENDELSE;", Ejemplo = "IF(VAR/NUM==VAR/NUM) THEN FUN(VAR,5);ENDIF ELSE SUB(8,4); ENDELSE;", Linea = lineas + 1 });
                     Extring = "";
                 }
 
@@ -107,13 +113,13 @@ namespace AnalizadorLexicoAtomatas.Model
 
                         switch (Extring)
                         {
-                            case "SUM": ListaIdent.Add(new EstructuraLexica { Token = "RESERVADA", Lexema = "SUM", Definicion = "FUNCIÓN SUMA", Sintaxis = "SUM(N,N);", Ejemplo = "SUM(4,2);" }); break;
-                            case "SUB": ListaIdent.Add(new EstructuraLexica { Token = "RESERVADA", Lexema = "SUB", Definicion = "FUNCIÓN RESTA", Sintaxis = "SUB(N,N);", Ejemplo = "SUB(4,2);" }); break;
-                            case "MLT": ListaIdent.Add(new EstructuraLexica { Token = "RESERVADA", Lexema = "MLT", Definicion = "FUNCIÓN MULTIPLICACIÓN", Sintaxis = "MLT(N,N);", Ejemplo = "MLT(4,2);" }); break;
-                            case "DIV": ListaIdent.Add(new EstructuraLexica { Token = "RESERVADA", Lexema = "DIV", Definicion = "FUNCIÓN DIVISIÓN", Sintaxis = "DIV(N,N);", Ejemplo = "DIV(4,2);" }); break;
-                            case "MOD": ListaIdent.Add(new EstructuraLexica { Token = "RESERVADA", Lexema = "MOD", Definicion = "FUNCIÓN MODULAR", Sintaxis = "MOD(N,N);", Ejemplo = "MOD(4,2);" }); break;
-                            case "INT": ListaIdent.Add(new EstructuraLexica { Token = "PRIMITIVO", Lexema = "INT", Definicion = "TIPO PRIMITIVO", Sintaxis = "INT NOM_VAR:=N;", Ejemplo = "INT a:=5;" }); break;
-                            case "FLT": ListaIdent.Add(new EstructuraLexica { Token = "PRIMITIVO", Lexema = "FLT", Definicion = "TIPO PRIMITIVO", Sintaxis = "FLT NOM_VAR:=N;", Ejemplo = "FLT a:=5;" }); break;
+                            case "SUM": ListaIdent.Add(new EstructuraLexica { Token = "RESERVADA", Lexema = "SUM", Definicion = "FUNCIÓN SUMA", Sintaxis = "SUM(N,N);", Ejemplo = "SUM(4,2);", Linea = lineas + 1 }); break;
+                            case "SUB": ListaIdent.Add(new EstructuraLexica { Token = "RESERVADA", Lexema = "SUB", Definicion = "FUNCIÓN RESTA", Sintaxis = "SUB(N,N);", Ejemplo = "SUB(4,2);", Linea = lineas + 1 }); break;
+                            case "MLT": ListaIdent.Add(new EstructuraLexica { Token = "RESERVADA", Lexema = "MLT", Definicion = "FUNCIÓN MULTIPLICACIÓN", Sintaxis = "MLT(N,N);", Ejemplo = "MLT(4,2);", Linea = lineas + 1 }); break;
+                            case "DIV": ListaIdent.Add(new EstructuraLexica { Token = "RESERVADA", Lexema = "DIV", Definicion = "FUNCIÓN DIVISIÓN", Sintaxis = "DIV(N,N);", Ejemplo = "DIV(4,2);", Linea = lineas + 1 }); break;
+                            case "MOD": ListaIdent.Add(new EstructuraLexica { Token = "RESERVADA", Lexema = "MOD", Definicion = "FUNCIÓN MODULAR", Sintaxis = "MOD(N,N);", Ejemplo = "MOD(4,2);", Linea = lineas + 1 }); break;
+                            case "INT": ListaIdent.Add(new EstructuraLexica { Token = "PRIMITIVO", Lexema = "INT", Definicion = "TIPO PRIMITIVO", Sintaxis = "INT NOM_VAR:=N;", Ejemplo = "INT a:=5;", Linea = lineas + 1 }); break;
+                            case "FLT": ListaIdent.Add(new EstructuraLexica { Token = "PRIMITIVO", Lexema = "FLT", Definicion = "TIPO PRIMITIVO", Sintaxis = "FLT NOM_VAR:=N;", Ejemplo = "FLT a:=5;", Linea = lineas + 1 }); break;
                             default: throw new ArgumentException("Interrupación ninguna coincidencia en palabras reservadas");
                         }
                         Extring = "";
@@ -130,13 +136,13 @@ namespace AnalizadorLexicoAtomatas.Model
                 {
                     switch (Extring)
                     {
-                        case "a": ListaIdent.Add(new EstructuraLexica { Token = "VAR", Lexema = "a", Definicion = "VARIABLE", Sintaxis = "TIPO VAR := NUM;", Ejemplo = "FLT a:=2.3F;" }); break;
-                        case "b": ListaIdent.Add(new EstructuraLexica { Token = "VAR", Lexema = "b", Definicion = "VARIABLE", Sintaxis = "TIPO VAR := NUM;", Ejemplo = "INT b:=2;" }); break;
-                        case "c": ListaIdent.Add(new EstructuraLexica { Token = "VAR", Lexema = "c", Definicion = "VARIABLE", Sintaxis = "TIPO VAR := NUM;", Ejemplo = "FLT c:=10.2F;" }); break;
-                        case "d": ListaIdent.Add(new EstructuraLexica { Token = "VAR", Lexema = "d", Definicion = "VARIABLE", Sintaxis = "TIPO VAR := NUM;", Ejemplo = "INT d:=3;" }); break;
-                        case "e": ListaIdent.Add(new EstructuraLexica { Token = "VAR", Lexema = "e", Definicion = "VARIABLE", Sintaxis = "TIPO VAR := NUM;", Ejemplo = "FLT e:=3.5F;" }); break;
-                        case "f": ListaIdent.Add(new EstructuraLexica { Token = "VAR", Lexema = "f", Definicion = "VARIABLE", Sintaxis = "TIPO VAR := NUM;", Ejemplo = "INT f:=3;" }); break;
-                        case "g": ListaIdent.Add(new EstructuraLexica { Token = "VAR", Lexema = "g", Definicion = "VARIABLE", Sintaxis = "TIPO VAR := NUM;", Ejemplo = "FLT g:=3.4F;" }); break;
+                        case "a": ListaIdent.Add(new EstructuraLexica { Token = "VAR", Lexema = "a", Definicion = "VARIABLE", Sintaxis = "TIPO VAR := NUM;", Ejemplo = "FLT a:=2.3F;", Linea = lineas + 1 }); break;
+                        case "b": ListaIdent.Add(new EstructuraLexica { Token = "VAR", Lexema = "b", Definicion = "VARIABLE", Sintaxis = "TIPO VAR := NUM;", Ejemplo = "INT b:=2;", Linea = lineas + 1 }); break;
+                        case "c": ListaIdent.Add(new EstructuraLexica { Token = "VAR", Lexema = "c", Definicion = "VARIABLE", Sintaxis = "TIPO VAR := NUM;", Ejemplo = "FLT c:=10.2F;", Linea = lineas + 1 }); break;
+                        case "d": ListaIdent.Add(new EstructuraLexica { Token = "VAR", Lexema = "d", Definicion = "VARIABLE", Sintaxis = "TIPO VAR := NUM;", Ejemplo = "INT d:=3;", Linea = lineas + 1 }); break;
+                        case "e": ListaIdent.Add(new EstructuraLexica { Token = "VAR", Lexema = "e", Definicion = "VARIABLE", Sintaxis = "TIPO VAR := NUM;", Ejemplo = "FLT e:=3.5F;", Linea = lineas + 1 }); break;
+                        case "f": ListaIdent.Add(new EstructuraLexica { Token = "VAR", Lexema = "f", Definicion = "VARIABLE", Sintaxis = "TIPO VAR := NUM;", Ejemplo = "INT f:=3;", Linea = lineas + 1 }); break;
+                        case "g": ListaIdent.Add(new EstructuraLexica { Token = "VAR", Lexema = "g", Definicion = "VARIABLE", Sintaxis = "TIPO VAR := NUM;", Ejemplo = "FLT g:=3.4F;", Linea = lineas + 1 }); break;
                         default: throw new ArgumentException("Interrupación ninguna coincidencia en palabras reservadas");
 
                     }
@@ -144,13 +150,13 @@ namespace AnalizadorLexicoAtomatas.Model
                 }
                 if (!String.IsNullOrWhiteSpace(Extring) && Extring.Length > 1 && Extring == ":=")
                 {
-                        ListaIdent.Add(new EstructuraLexica { Token = "ASI", Lexema = ":=", Definicion = "ASIGNACIÓN", Sintaxis = "TIPO VAR := NUM;", Ejemplo = "FLT a:=2.3F;" }); 
+                        ListaIdent.Add(new EstructuraLexica { Token = "ASI", Lexema = ":=", Definicion = "ASIGNACIÓN", Sintaxis = "TIPO VAR := NUM;", Ejemplo = "FLT a:=2.3F;", Linea = lineas + 1 }); 
                    
                     Extring = "";
                 }
                 if (!String.IsNullOrWhiteSpace(Extring) && Extring.Length > 1 && Extring == "==")
                 {
-                   ListaIdent.Add(new EstructuraLexica { Token = "BOOL EQUAL", Lexema = Extring.ToString(), Definicion = "IGUALDAD LÓGICA", Sintaxis = "IF(a==b)", Ejemplo = "IF(a==5)" }); 
+                   ListaIdent.Add(new EstructuraLexica { Token = "BOOL EQUAL", Lexema = Extring.ToString(), Definicion = "IGUALDAD LÓGICA", Sintaxis = "IF(a==b)", Ejemplo = "IF(a==5)", Linea = lineas + 1 }); 
                     
                     Extring = "";
                 }
@@ -161,12 +167,12 @@ namespace AnalizadorLexicoAtomatas.Model
                 //}
                 if (!String.IsNullOrWhiteSpace(Extring) && Regex.IsMatch(Extring, @"(\d{1,1}\x2E\d{1,1})F")|| (Regex.IsMatch(array[i].ToString(), @"[0-9]{1,1}")&&(Auxiliar.ToArray()[i+1].ToString()==","|| Auxiliar.ToArray()[i + 1].ToString() == ")"|| Auxiliar.ToArray()[i + 1].ToString() == ";")))
                 {
-                    ListaIdent.Add(new EstructuraLexica { Token = "NUM", Lexema = Extring.ToString(), Definicion = "NÚMERO", Sintaxis = "TIPO VAR := NUM;", Ejemplo = "FLT a:=2.3F;" });
+                    ListaIdent.Add(new EstructuraLexica { Token = "NUM", Lexema = Extring.ToString(), Definicion = "NÚMERO", Sintaxis = "TIPO VAR := NUM;", Ejemplo = "FLT a:=2.3F;", Linea = lineas + 1 });
                     Extring = "";
                 }
                 if (!String.IsNullOrWhiteSpace(Extring) && Extring == "\x2E" && ListaIdent.ToArray()[3].Token == "RESERVADA")
                 {
-                    ListaIdent.Add(new EstructuraLexica { Token = "DOT", Lexema = Extring.ToString(), Definicion = "Conversion", Sintaxis = "TIPO VAR := FUN.TIPO(5,FUN(4,3));", Ejemplo = "FLT a:=MLT.FLT(5.3F,6);" });
+                    ListaIdent.Add(new EstructuraLexica { Token = "DOT", Lexema = Extring.ToString(), Definicion = "Conversion", Sintaxis = "TIPO VAR := FUN.TIPO(5,FUN(4,3));", Ejemplo = "FLT a:=MLT.FLT(5.3F,6);", Linea = lineas + 1 });
                     Extring = "";
                 }
 
@@ -182,7 +188,7 @@ namespace AnalizadorLexicoAtomatas.Model
                     LEXC += array[i].ToString();
                     switch (LEXC)
                     {
-                        case "(": ListaIdent.Add(new EstructuraLexica { Token = "DELIMITADOR", Lexema = "(", Definicion = "DELIMITA LAS FUNCIONES", Sintaxis = "FUN(N,N);", Ejemplo = "FUN(4,2);" }); break;
+                        case "(": ListaIdent.Add(new EstructuraLexica { Token = "DELIMITADOR", Lexema = "(", Definicion = "DELIMITA LAS FUNCIONES", Sintaxis = "FUN(N,N);", Ejemplo = "FUN(4,2);", Linea = lineas + 1 }); break;
                     }
                     LEXC = "";
                     Extring = "";
@@ -205,7 +211,7 @@ namespace AnalizadorLexicoAtomatas.Model
                 //}
                 if (Extring == ",")
                 {
-                    ListaIdent.Add(new EstructuraLexica { Token = "DELIMITADOR", Lexema = ",", Definicion = "DELIMITADOR COMA", Sintaxis = "FUN(N,N);", Ejemplo = "FUN(N,N);" });
+                    ListaIdent.Add(new EstructuraLexica { Token = "DELIMITADOR", Lexema = ",", Definicion = "DELIMITADOR COMA", Sintaxis = "FUN(N,N);", Ejemplo = "FUN(N,N);", Linea = lineas + 1 });
                     Extring = "";
                 }
 
@@ -216,7 +222,7 @@ namespace AnalizadorLexicoAtomatas.Model
                     LEXC += array[i].ToString();
                     switch (LEXC)
                     {
-                        case ")": ListaIdent.Add(new EstructuraLexica { Token = "DELIMITADOR", Lexema = ")", Definicion = "DELIMITA LAS FUNCIONES", Sintaxis = "FUN(N,N);", Ejemplo = "FUN(4,2);" }); break;
+                        case ")": ListaIdent.Add(new EstructuraLexica { Token = "DELIMITADOR", Lexema = ")", Definicion = "DELIMITA LAS FUNCIONES", Sintaxis = "FUN(N,N);", Ejemplo = "FUN(4,2);", Linea = lineas + 1 }); break;
                     }
                     LEXC = "";
                     Extring = "";
@@ -230,7 +236,7 @@ namespace AnalizadorLexicoAtomatas.Model
                 // se termina la sentencia para las funciones aritméticas
                 if (array[i] == ';')
                 {
-                    ListaIdent.Add(new EstructuraLexica { Token = "Ent. Terminal", Lexema = ";", Definicion = "SÍMBOLO TERMINAL", Sintaxis = "FUN(N,N);", Ejemplo = "FUN(4,2);" });
+                    ListaIdent.Add(new EstructuraLexica { Token = "Ent. Terminal", Lexema = ";", Definicion = "SÍMBOLO TERMINAL", Sintaxis = "FUN(N,N);", Ejemplo = "FUN(4,2);", Linea = lineas + 1 });
                     Extring = "";
                 }
 

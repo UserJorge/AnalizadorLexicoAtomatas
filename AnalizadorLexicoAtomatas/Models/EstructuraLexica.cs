@@ -48,13 +48,13 @@ namespace AnalizadorLexicoAtomatas.Model
             set { ejemplo = value; }
         }
 
-        //private int linea;
+        private int linea;
 
-        //public int Linea
-        //{
-        //    get { return linea; }
-        //    set { linea = value; }
-        //}
+        public int Linea
+        {
+            get { return linea; }
+            set { linea = value; }
+        }
 
         //private int columna;
 
