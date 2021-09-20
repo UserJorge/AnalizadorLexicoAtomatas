@@ -106,10 +106,10 @@ namespace AnalizadorLexicoAtomatas.Model
 
                 //saber si las letras almacenadas representan una palabra reservada
                 //&&Extring!="THE" && Extring != "END"&&Extring!="ELS"
-                if (Extring != null && Extring.Length > 2 && (!Regex.IsMatch(Extring, @"(\d{1,1}\x2E\d{1,1})")&&!Regex.IsMatch(Extring,@"(THE|N)") && !Regex.IsMatch(Extring, @"(END|IF)") && !Regex.IsMatch(Extring, @"(ELS|E)") && !Regex.IsMatch(Extring, @"(END|ELSE)"))||Extring=="INT")
+                if (Extring != null && Extring.Length > 2 && (!Regex.IsMatch(Extring, @"(\d+?\x2E\d+?|F)")&&!Regex.IsMatch(Extring,@"(THE|N)") && !Regex.IsMatch(Extring, @"(END|IF)") && !Regex.IsMatch(Extring, @"(ELS|E)") && !Regex.IsMatch(Extring, @"(END|ELSE)"))||Extring=="INT")
                 {
-                    if (Regex.IsMatch(Extring, @"^(SUM|SUB|DIV|MLT|MOD|INT|FLT)$"))
-                    {
+                    if (Regex.IsMatch(Extring, @"^(SUM|SUB|DIV|MLT|MOD|INT|FLT|DOU)$"))
+                    { 
 
                         switch (Extring)
                         {
@@ -119,7 +119,8 @@ namespace AnalizadorLexicoAtomatas.Model
                             case "DIV": ListaIdent.Add(new EstructuraLexica { Token = "RESERVADA", Lexema = "DIV", Definicion = "FUNCIÓN DIVISIÓN", Sintaxis = "DIV(N,N);", Ejemplo = "DIV(4,2);", Linea = lineas + 1 }); break;
                             case "MOD": ListaIdent.Add(new EstructuraLexica { Token = "RESERVADA", Lexema = "MOD", Definicion = "FUNCIÓN MODULAR", Sintaxis = "MOD(N,N);", Ejemplo = "MOD(4,2);", Linea = lineas + 1 }); break;
                             case "INT": ListaIdent.Add(new EstructuraLexica { Token = "PRIMITIVO", Lexema = "INT", Definicion = "TIPO PRIMITIVO", Sintaxis = "INT NOM_VAR:=N;", Ejemplo = "INT a:=5;", Linea = lineas + 1 }); break;
-                            case "FLT": ListaIdent.Add(new EstructuraLexica { Token = "PRIMITIVO", Lexema = "FLT", Definicion = "TIPO PRIMITIVO", Sintaxis = "FLT NOM_VAR:=N;", Ejemplo = "FLT a:=5;", Linea = lineas + 1 }); break;
+                            case "FLT": ListaIdent.Add(new EstructuraLexica { Token = "PRIMITIVO", Lexema = "FLT", Definicion = "TIPO PRIMITIVO", Sintaxis = "FLT NOM_VAR:=N;", Ejemplo = "FLT a:=5.3F;", Linea = lineas + 1 }); break;
+                            case "DOU": ListaIdent.Add(new EstructuraLexica { Token = "PRIMITIVO", Lexema = "DOU", Definicion = "TIPO PRIMITIVO", Sintaxis = "FLT NOM_VAR:=N;", Ejemplo = "DOU a:=5.63D;", Linea = lineas + 1 }); break;
                             default: throw new ArgumentException("Interrupación ninguna coincidencia en palabras reservadas");
                         }
                         Extring = "";
@@ -165,9 +166,28 @@ namespace AnalizadorLexicoAtomatas.Model
                 //       ListaIdent.Add(new EstructuraLexica { Token = "NUM", Lexema = Extring.ToString(), Definicion = "NÚMERO", Sintaxis = "TIPO VAR := NUM;", Ejemplo = "FLT a:=2.3F;" });
                 //       Extring = "";
                 //}
-                if (!String.IsNullOrWhiteSpace(Extring) && Regex.IsMatch(Extring, @"(\d{1,1}\x2E\d{1,1})F")|| (Regex.IsMatch(array[i].ToString(), @"[0-9]{1,1}")&&(Auxiliar.ToArray()[i+1].ToString()==","|| Auxiliar.ToArray()[i + 1].ToString() == ")"|| Auxiliar.ToArray()[i + 1].ToString() == ";")))
+                //(Auxiliar.ToArray()[i + 1].ToString() == "," || Auxiliar.ToArray()[i + 1].ToString() == ")" || Auxiliar.ToArray()[i + 1].ToString() == ";")
+                //(Regex.IsMatch(array[i].ToString(), @"[0-9]{1,1}")
+                //Dado un numero double se debe especificar una D mayúscula que vaya con las siguientes restricciones
+                //1. debe respetar un número de cualquier longitud de números del [0-9] almenos una vez o más dígitos 
+                //2. debe colocarse un punto para seguir con la escritura de los decimales
+                //3. los números decimales pueden ser cualquier longitud de 1,...,n en los cuales son dígitos del [0-9]
+                if (!String.IsNullOrWhiteSpace(Extring) && Regex.IsMatch(Extring, @"(\d+?\x2E\d+?)D"))
                 {
-                    ListaIdent.Add(new EstructuraLexica { Token = "NUM", Lexema = Extring.ToString(), Definicion = "NÚMERO", Sintaxis = "TIPO VAR := NUM;", Ejemplo = "FLT a:=2.3F;", Linea = lineas + 1 });
+                    ListaIdent.Add(new EstructuraLexica { Token = "NUM", Lexema = Extring.ToString(), Definicion = "DOUBLE", Sintaxis = "TIPO VAR := NUM;", Ejemplo = "FLT a:=2.3F;", Linea = lineas + 1 });
+                    Extring = "";
+                }
+                if (!String.IsNullOrWhiteSpace(Extring) && Regex.IsMatch(Extring, @"(\d+?\x2E\d+?)F")|| (Regex.IsMatch(array[i].ToString(), @"[0-9]{1,1}")&&(Auxiliar.ToArray()[i+1].ToString()==","|| Auxiliar.ToArray()[i + 1].ToString() == ")"|| Auxiliar.ToArray()[i + 1].ToString() == ";")))
+                {
+                    if (Regex.IsMatch(Extring, @"(\d+?\x2E\d+?)F"))
+                    {
+                        ListaIdent.Add(new EstructuraLexica { Token = "NUM", Lexema = Extring.ToString(), Definicion = "FLOAT", Sintaxis = "TIPO VAR := NUM;", Ejemplo = "FLT a:=2.3F;", Linea = lineas + 1 });
+                    }
+                    else
+                    {
+                        ListaIdent.Add(new EstructuraLexica { Token = "NUM", Lexema = Extring.ToString(), Definicion = "INT", Sintaxis = "TIPO VAR := NUM;", Ejemplo = "FLT a:=2.3F;", Linea = lineas + 1 });
+                    }
+                    
                     Extring = "";
                 }
                 if (!String.IsNullOrWhiteSpace(Extring) && Extring == "\x2E" && ListaIdent.ToArray()[3].Token == "RESERVADA")
@@ -193,7 +213,7 @@ namespace AnalizadorLexicoAtomatas.Model
                     LEXC = "";
                     Extring = "";
                 }
-                else if (i == 3 && !Regex.IsMatch(array[i].ToString(), @"^(\x28)$") && ListaIdent.ToArray()[0].Lexema != "INT" && ListaIdent.ToArray()[0].Lexema != "FLT" && ListaIdent.ToArray()[0].Lexema != "IF")
+                else if (i == 3 && !Regex.IsMatch(array[i].ToString(), @"^(\x28)$") && ListaIdent.ToArray()[0].Lexema != "INT" && ListaIdent.ToArray()[0].Lexema != "FLT" && ListaIdent.ToArray()[0].Lexema != "IF" && ListaIdent.ToArray()[0].Lexema != "DOU")
                 {
                     throw new ArgumentException("Error en el parentesis apertura");
                 }
@@ -229,7 +249,7 @@ namespace AnalizadorLexicoAtomatas.Model
 
                 }
                 //identificar solamente si no hay un paréntesis de clausura
-                else if (i == Auxiliar.Length - 2 && !Regex.IsMatch(array[Auxiliar.Length - 2].ToString(), @"^(\x29)$") && !Regex.IsMatch(Auxiliar, @"(\d{1,1}\x2E\d{1,1})F") && !(ListaIdent.ToArray()[0].Lexema == "INT") && !(ListaIdent.ToArray()[0].Lexema == "IF"))
+                else if (i == Auxiliar.Length - 2 && !Regex.IsMatch(array[Auxiliar.Length - 2].ToString(), @"^(\x29)$") && !Regex.IsMatch(Auxiliar, @"(\d{1,1}\x2E\d{1,1})F") && !(ListaIdent.ToArray()[0].Lexema == "INT") && !(ListaIdent.ToArray()[0].Lexema == "IF")&& !(ListaIdent.ToArray()[0].Lexema == "DOU"))
                 {
                     throw new ArgumentException("parentesis de clausura");
                 }
