@@ -76,7 +76,6 @@ namespace AnalizadorLexicoAtomatas.Model
                 {
                    ListaIdent.Add(new EstructuraLexica { Token = "CONDICIONAL", Lexema = "IF", Definicion = "IF Statement", Sintaxis = "IF(VAR/NUM==VAR/NUM) THEN FUN(VAR,5);ENDIF;", Ejemplo = "IF(VAR/NUM==VAR/NUM) THEN FUN(4,5);ENDIF;" });
                     Extring = "";
-
                 }
                 if (Extring != null && Extring == "THEN")
                 {
@@ -101,7 +100,7 @@ namespace AnalizadorLexicoAtomatas.Model
 
                 //saber si las letras almacenadas representan una palabra reservada
                 //&&Extring!="THE" && Extring != "END"&&Extring!="ELS"
-                if (Extring != null && Extring.Length > 2 && !Regex.IsMatch(Extring, @"(\d{1,1}\x2E\d{1,1})")&&!Regex.IsMatch(Extring,@"(THE|N)") && !Regex.IsMatch(Extring, @"(END|IF)") && !Regex.IsMatch(Extring, @"(ELS|E)") && !Regex.IsMatch(Extring, @"(END|ELSE)"))
+                if (Extring != null && Extring.Length > 2 && (!Regex.IsMatch(Extring, @"(\d{1,1}\x2E\d{1,1})")&&!Regex.IsMatch(Extring,@"(THE|N)") && !Regex.IsMatch(Extring, @"(END|IF)") && !Regex.IsMatch(Extring, @"(ELS|E)") && !Regex.IsMatch(Extring, @"(END|ELSE)"))||Extring=="INT")
                 {
                     if (Regex.IsMatch(Extring, @"^(SUM|SUB|DIV|MLT|MOD|INT|FLT)$"))
                     {
