@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace AnalizadorLexicoAtomatas.Models
 {
+    //******Esta clase no se utiliza*******
+
+
     //lo que se hará a continuación 
     //traer el source code de la parte del viewModel
     //identificar cada uno de los identificadores, palabras clave y signos de puntuación del lenguaje

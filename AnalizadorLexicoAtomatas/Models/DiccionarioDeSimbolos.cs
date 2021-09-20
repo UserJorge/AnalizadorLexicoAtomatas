@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace AnalizadorLexicoAtomatas.Models
 {
+    //******Esta clase no se utiliza*******
     public class DiccionarioDeSimbolos
     {
         public List<TablaDeSimbolos> tSimbolos = new List<TablaDeSimbolos>();

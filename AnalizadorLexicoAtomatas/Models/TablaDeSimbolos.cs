@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace AnalizadorLexicoAtomatas.Models
 {
+    //******Esta clase no se utiliza*******
     public class TablaDeSimbolos
     {
         private int ID_Token;

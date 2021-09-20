@@ -8,12 +8,12 @@ namespace AnalizadorLexicoAtomatas.Models
 {
    public class ArbolBinario
     {
-      
+        //******Esta clase no se utiliza*******
 
-            /// <summary>
-            /// Se crea la estructura del nodo
-            /// </summary>
-            class Nodo
+        /// <summary>
+        /// Se crea la estructura del nodo
+        /// </summary>
+        class Nodo
             {
                 public char info;
                 public Nodo izq, der;

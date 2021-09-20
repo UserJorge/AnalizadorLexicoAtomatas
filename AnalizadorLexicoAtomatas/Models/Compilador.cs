@@ -8,16 +8,17 @@ using System.Threading.Tasks;
 
 namespace AnalizadorLexicoAtomatas.Models
 {
-   
-        //public List<AnalizadorResultado> Compilar(List<EstructuraLexica> r)
-        //{
+    //******Esta clase no se utiliza*******
 
-        //Aquí se pondrá el código que se propondrá en la segunda parte
-        // se generará código intermedio y máquina que recorrerá los tokens que vienen de List<EstructuraLexica>
-        //se pasará a codigo entandible mediante la máquina de turing con un algoritmo.
+    //public List<AnalizadorResultado> Compilar(List<EstructuraLexica> r)
+    //{
 
-        //}
-        public class Compilador
+    //Aquí se pondrá el código que se propondrá en la segunda parte
+    // se generará código intermedio y máquina que recorrerá los tokens que vienen de List<EstructuraLexica>
+    //se pasará a codigo entandible mediante la máquina de turing con un algoritmo.
+
+    //}
+    public class Compilador
         {
             public List<AnalizadorResultado> Estructuras;
             public List<AnalizadorResultado> Compilar(List<EstructuraLexica> r)
