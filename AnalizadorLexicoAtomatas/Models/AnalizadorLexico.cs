@@ -120,7 +120,7 @@ namespace AnalizadorLexicoAtomatas.Model
                             case "INT": ListaIdent.Add(new EstructuraLexica { Token = "PRIMITIVO", Lexema = "INT", Definicion = "TIPO PRIMITIVO", Sintaxis = "INT NOM_VAR:=N;", Ejemplo = "INT a:=5;", Linea = lineas + 1 }); break;
                             case "FLT": ListaIdent.Add(new EstructuraLexica { Token = "PRIMITIVO", Lexema = "FLT", Definicion = "TIPO PRIMITIVO", Sintaxis = "FLT NOM_VAR:=N;", Ejemplo = "FLT a:=5.3F;", Linea = lineas + 1 }); break;
                             case "DOU": ListaIdent.Add(new EstructuraLexica { Token = "PRIMITIVO", Lexema = "DOU", Definicion = "TIPO PRIMITIVO", Sintaxis = "FLT NOM_VAR:=N;", Ejemplo = "DOU a:=5.63D;", Linea = lineas + 1 }); break;
-                            default: throw new ArgumentException("Interrupación ninguna coincidencia en palabras reservadas");
+                            default: throw new ArgumentException("Interrupción, ninguna coincidencia en palabras reservadas");
                         }
                         Extring = "";
                     }
@@ -143,7 +143,7 @@ namespace AnalizadorLexicoAtomatas.Model
                         case "e": ListaIdent.Add(new EstructuraLexica { Token = "VAR", Lexema = "e", Definicion = "VARIABLE", Sintaxis = "TIPO VAR := NUM;", Ejemplo = "FLT e:=3.5F;", Linea = lineas + 1 }); break;
                         case "f": ListaIdent.Add(new EstructuraLexica { Token = "VAR", Lexema = "f", Definicion = "VARIABLE", Sintaxis = "TIPO VAR := NUM;", Ejemplo = "INT f:=3;", Linea = lineas + 1 }); break;
                         case "g": ListaIdent.Add(new EstructuraLexica { Token = "VAR", Lexema = "g", Definicion = "VARIABLE", Sintaxis = "TIPO VAR := NUM;", Ejemplo = "FLT g:=3.4F;", Linea = lineas + 1 }); break;
-                        default: throw new ArgumentException("Interrupación ninguna coincidencia en palabras reservadas");
+                        default: throw new ArgumentException("Interrupción, ninguna coincidencia en palabras reservadas");
 
                     }
                     Extring = "";
@@ -232,7 +232,7 @@ namespace AnalizadorLexicoAtomatas.Model
                 }
                 else if (i == 3 && !Regex.IsMatch(array[i].ToString(), @"^(\x28)$") && ListaIdent.ToArray()[0].Lexema != "INT" && ListaIdent.ToArray()[0].Lexema != "FLT" && ListaIdent.ToArray()[0].Lexema != "IF" && ListaIdent.ToArray()[0].Lexema != "DOU")
                 {
-                    throw new ArgumentException("Error en el parentesis apertura");
+                    throw new ArgumentException("Error en el paréntesis apertura");
                 }
 
 
@@ -268,7 +268,7 @@ namespace AnalizadorLexicoAtomatas.Model
                 //identificar solamente si no hay un paréntesis de clausura
                 else if (i == Auxiliar.Length - 2 && !Regex.IsMatch(array[Auxiliar.Length - 2].ToString(), @"^(\x29)$") && !Regex.IsMatch(Auxiliar, @"(\d{1,1}\x2E\d{1,1})F") && !(ListaIdent.ToArray()[0].Lexema == "INT") && !(ListaIdent.ToArray()[0].Lexema == "IF")&& !(ListaIdent.ToArray()[0].Lexema == "DOU"))
                 {
-                    throw new ArgumentException("parentesis de clausura");
+                    throw new ArgumentException("Error en el paréntesis de clausura");
                 }
                 // se termina la sentencia para las funciones aritméticas
                 if (array[i] == ';')
