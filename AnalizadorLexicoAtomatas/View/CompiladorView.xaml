@@ -32,7 +32,7 @@
                 </Grid.ColumnDefinitions>
                 <Grid.Resources>
                     <Style TargetType="TextBox">
-                        <Setter Property="FontSize" Value="22"/>
+                        <Setter Property="FontSize" Value="16"/>
                         <Setter Property="Background" Value="Transparent"/>
                         <Setter Property="BorderThickness" Value="3"/>
                         <Setter Property="BorderBrush" Value="#09a3ba"/>
@@ -90,16 +90,17 @@
                 </Grid.Resources>
 
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition></ColumnDefinition>
-                    <ColumnDefinition></ColumnDefinition>
-                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition Width="300*"></ColumnDefinition>
+                    <ColumnDefinition Width="170*"></ColumnDefinition>
+                    
+                    <ColumnDefinition Width="170*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition></RowDefinition>
                     <RowDefinition></RowDefinition>
                 </Grid.RowDefinitions>
 
-                <DockPanel  Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3"  Margin="10">
+                <DockPanel  Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4"  Margin="10,10,9.667,10">
                     <TextBlock DockPanel.Dock="Top" FontSize="18">Analizador léxico</TextBlock>
                     <DataGrid ItemsSource="{Binding lista}">
                         <DataGrid.BitmapEffect>
@@ -163,11 +164,11 @@
                         </Button.Resources>
                     </Button>
                 </Grid>
-                <DockPanel  Grid.Row="0" Grid.Column="2"  >
+                <DockPanel  Grid.Row="0" Grid.Column="3" >
                     <TextBlock DockPanel.Dock="Top" FontSize="15">Sintáctica-Semántica</TextBlock>
                     <DataGrid></DataGrid>
                 </DockPanel>
-                <DockPanel  Grid.Row="0" Grid.Column="1"  >
+                <DockPanel  Grid.Row="0" Grid.Column="1" >
                     <TextBlock DockPanel.Dock="Top" FontSize="15">Analizador General</TextBlock>
                     <DataGrid></DataGrid>
                 </DockPanel>
