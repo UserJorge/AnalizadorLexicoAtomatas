@@ -149,6 +149,18 @@ namespace AnalizadorLexicoAtomatas.Model
                     }
                     Extring = "";
                 }
+                if (!String.IsNullOrWhiteSpace(Extring) && Extring == "<")
+                {
+                    ListaIdent.Add(new EstructuraLexica { Token = "LSD", Lexema = "<", Definicion = "MENOR QUE", Sintaxis = "IF(VAR<5)", Ejemplo = "IF(VAR<4) ", Linea = lineas + 1 });
+
+                    Extring = "";
+                }
+                if (!String.IsNullOrWhiteSpace(Extring) && Extring == ">")
+                {
+                    ListaIdent.Add(new EstructuraLexica { Token = "GDR", Lexema = ">", Definicion = "MAYOR QUE", Sintaxis = "IF(5>a)", Ejemplo = "IF(8>a)", Linea = lineas + 1 });
+
+                    Extring = "";
+                }
                 if (!String.IsNullOrWhiteSpace(Extring) && Extring.Length > 1 && Extring == ":=")
                 {
                         ListaIdent.Add(new EstructuraLexica { Token = "ASI", Lexema = ":=", Definicion = "ASIGNACIÓN", Sintaxis = "TIPO VAR := NUM;", Ejemplo = "FLT a:=2.3F;", Linea = lineas + 1 }); 
@@ -159,6 +171,12 @@ namespace AnalizadorLexicoAtomatas.Model
                 {
                    ListaIdent.Add(new EstructuraLexica { Token = "BOOL EQUAL", Lexema = Extring.ToString(), Definicion = "IGUALDAD LÓGICA", Sintaxis = "IF(a==b)", Ejemplo = "IF(a==5)", Linea = lineas + 1 }); 
                     
+                    Extring = "";
+                }
+                if (!String.IsNullOrWhiteSpace(Extring) && Extring.Length > 1 && Extring == "!=")
+                {
+                    ListaIdent.Add(new EstructuraLexica { Token = "DESIGUALDAD", Lexema = Extring.ToString(), Definicion = "DESIGUALDAD LÓGICA", Sintaxis = "IF(a!=b)", Ejemplo = "IF(a!=5)", Linea = lineas + 1 });
+
                     Extring = "";
                 }
                 //if (!String.IsNullOrWhiteSpace(Extring) && Regex.IsMatch(Extring, @"(\d)") && Auxiliar.ToArray()[i+1].ToString() !="."&& Regex.IsMatch(Extring, @"(\x2C\d)"))
@@ -185,7 +203,7 @@ namespace AnalizadorLexicoAtomatas.Model
                     }
                     else
                     {
-                        ListaIdent.Add(new EstructuraLexica { Token = "NUM", Lexema = Extring.ToString(), Definicion = "INT", Sintaxis = "TIPO VAR := NUM;", Ejemplo = "FLT a:=2.3F;", Linea = lineas + 1 });
+                        ListaIdent.Add(new EstructuraLexica { Token = "NUM", Lexema = Extring.ToString(), Definicion = "INT", Sintaxis = "TIPO VAR := NUM;", Ejemplo = "INT a:=2;", Linea = lineas + 1 });
                     }
                     
                     Extring = "";
