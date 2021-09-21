@@ -51,7 +51,7 @@ namespace AnalizadorLexicoAtomatas.Models
                         case "MOD": Estructuras.Add(new AnalizadorResultado { Estructura = "Función residuo", Detalle = "Palabra Reservada" }); midCode += "%"; break;
 
                         default: 
-                            throw new ArgumentException("Interrupación ninguna coincidencia en palabras reservadas");
+                            throw new ArgumentException("Interrupción, ninguna coincidencia en palabras reservadas");
                     }
                   
                 }
