@@ -18,7 +18,7 @@
         </DockPanel.DataContext>
         <Label DockPanel.Dock="Top" HorizontalAlignment="Center" FontStyle="Italic" Foreground="#000f20" FontSize="40"
                FontFamily="Times New Roman Bold Italic" FontWeight="Bold">ᑕᗩᒪᑕ ᖴᑌᑎ</Label>
-        <Label Content="{Binding Error}" FontFamily="Times New Roman Bond Italic" Foreground="#cd5456" FontSize="25" Height="25" DockPanel.Dock="Bottom"></Label>
+        <Label Content="{Binding Error}"  FontFamily="Times New Roman Bond Italic" Foreground="#8B1228" FontSize="25" Height="auto" DockPanel.Dock="Bottom"> </Label>
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width=".20*"/>
