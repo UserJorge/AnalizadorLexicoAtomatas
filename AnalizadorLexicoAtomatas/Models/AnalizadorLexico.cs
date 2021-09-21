@@ -106,11 +106,10 @@ namespace AnalizadorLexicoAtomatas.Model
 
                 //saber si las letras almacenadas representan una palabra reservada
                 //&&Extring!="THE" && Extring != "END"&&Extring!="ELS"
-                if (Extring != null && Extring.Length > 2 && (!Regex.IsMatch(Extring, @"(\d+?\x2E\d+?|F)")&&!Regex.IsMatch(Extring,@"(THE|N)") && !Regex.IsMatch(Extring, @"(END|IF)") && !Regex.IsMatch(Extring, @"(ELS|E)") && !Regex.IsMatch(Extring, @"(END|ELSE)"))||Extring=="INT")
+                if (Extring != null && Extring.Length > 2 && ((!Regex.IsMatch(Extring, @"(\d+\x2E?\d+F?)")&&!Regex.IsMatch(Extring, @"\b\d+\x2E{1,1}\b")) && !Regex.IsMatch(Extring,@"(THE|N)") && !Regex.IsMatch(Extring, @"(END|IF)") && !Regex.IsMatch(Extring, @"(ELS|E)") && !Regex.IsMatch(Extring, @"(END|ELSE)"))||Extring=="INT")
                 {
                     if (Regex.IsMatch(Extring, @"^(SUM|SUB|DIV|MLT|MOD|INT|FLT|DOU)$"))
                     { 
-
                         switch (Extring)
                         {
                             case "SUM": ListaIdent.Add(new EstructuraLexica { Token = "RESERVADA", Lexema = "SUM", Definicion = "FUNCIÓN SUMA", Sintaxis = "SUM(N,N);", Ejemplo = "SUM(4,2);", Linea = lineas + 1 }); break;
