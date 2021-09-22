@@ -185,6 +185,8 @@ namespace AnalizadorLexicoAtomatas.Model
                 //}
                 //(Auxiliar.ToArray()[i + 1].ToString() == "," || Auxiliar.ToArray()[i + 1].ToString() == ")" || Auxiliar.ToArray()[i + 1].ToString() == ";")
                 //(Regex.IsMatch(array[i].ToString(), @"[0-9]{1,1}")
+
+
                 //Dado un numero double se debe especificar una D mayúscula que vaya con las siguientes restricciones
                 //1. debe respetar un número de cualquier longitud de números del [0-9] almenos una vez o más dígitos 
                 //2. debe colocarse un punto para seguir con la escritura de los decimales
@@ -266,7 +268,7 @@ namespace AnalizadorLexicoAtomatas.Model
 
                 }
                 //identificar solamente si no hay un paréntesis de clausura
-                else if (i == Auxiliar.Length - 2 && !Regex.IsMatch(array[Auxiliar.Length - 2].ToString(), @"^(\x29)$") && !Regex.IsMatch(Auxiliar, @"(\d{1,1}\x2E\d{1,1})F") && !(ListaIdent.ToArray()[0].Lexema == "INT") && !(ListaIdent.ToArray()[0].Lexema == "IF")&& !(ListaIdent.ToArray()[0].Lexema == "DOU"))
+                else if (i == Auxiliar.Length - 2 && !Regex.IsMatch(array[Auxiliar.Length - 2].ToString(), @"^(\x29)$") && !Regex.IsMatch(Auxiliar, @"(\d{1,1}\x2E\d{1,1})F") && !(ListaIdent.ToArray()[0].Lexema == "INT") && !(ListaIdent.ToArray()[0].Lexema == "IF")&& !(ListaIdent.ToArray()[0].Lexema == "DOU" && !(ListaIdent.ToArray()[0].Lexema == "FLT")))
                 {
                     throw new ArgumentException("Error en el paréntesis de clausura");
                 }
@@ -284,11 +286,7 @@ namespace AnalizadorLexicoAtomatas.Model
 
             }
             return ListaIdent;
-            //List<Complete> ListaCompleta = new List<Complete>();
-            //public List<Complete> RegresarTokens(string CodeSource)
-            //{
-            //    return ListaCompleta;
-            //}
+           
 
 
         }

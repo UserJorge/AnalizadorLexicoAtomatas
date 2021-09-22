@@ -9,159 +9,107 @@ namespace AnalizadorLexicoAtomatas.Models
    public class ArbolBinario
     {
         //******Esta clase no se utiliza*******
+        
+        //Puede ocasinarse un OutOfMemoryException
+        public class Nodo
+        {
+            private object datos;
 
-        /// <summary>
-        /// Se crea la estructura del nodo
-        /// </summary>
-        class Nodo
+            private Nodo nodoIzquierdo;
+
+            private Nodo nodoDerecho;
+            public object Datos
             {
-                public char info;
-                public Nodo izq, der;
+                get { return datos; }
+                set { datos = value; }
             }
+            public Nodo(object dato)
+            {
+                nodoIzquierdo = nodoDerecho = null;
+            }
+            public Nodo NodoDerecho
+            {
+                get { return nodoDerecho; }
+                set { nodoDerecho = value; }
+            }
+            public Nodo NodoIzquierdo
+            {
+                get { return nodoIzquierdo; }
+                set { nodoIzquierdo = value; }
+            }
+            public void Insertar(object valorDeInsercion)
+            {
+                //vamos a ver si hay que transformarlo a double, float o int según corresponda (como venía declarado)
+                //y el segundo paso es el recorrido del arbol si hay un double y
+                //un int convertimos el int en double para poder hacer la operación
 
-            /// <summary>
-            /// se intancia la raiz de tipo 
-            /// </summary>
-            /// <remarks>
-            /// <c>Insertar</c> es el proceso para insertar un nodo a el arbol binario
-            /// </remarks>
-            Nodo raiz;
-
-            public ArbolBinario()
+            }
+        }
+        public class Arbol
+        {
+            private Nodo raiz;
+            public Arbol()
             {
                 raiz = null;
             }
-
-            public void Insertar(char info)
+            public void InsertarNodo(object numero)
             {
-                Nodo nuevo;
-                nuevo = new Nodo();
-                nuevo.info = info;
-                nuevo.izq = null;
-                nuevo.der = null;
                 if (raiz == null)
-                    raiz = nuevo;
-                else
                 {
-                    Nodo anterior = null, reco;
-                    reco = raiz;
-                    while (reco != null)
-                    {
-                        anterior = reco;
-                        if (info < reco.info)
-                            reco = reco.izq;
-                        else
-                            reco = reco.der;
-                    }
-                    if (info < anterior.info)
-                        anterior.izq = nuevo;
-                    else
-                        anterior.der = nuevo;
+                    raiz = new Nodo(numero);
                 }
+                else 
+                    raiz.Insertar(numero);
+
             }
-
-
-            private void ImprimirPre(Nodo reco)
+            public void RecorridoPreorden()
             {
-                if (reco != null)
+                AyudantePreorden(raiz);
+            }
+            public void AyudantePreorden(Nodo nodo)
+            {
+                if (nodo==null)
                 {
-                auxiliar += reco.info;
-                //Console.Write(reco.info + " ");
-                ImprimirPre(reco.izq);
-                    ImprimirPre(reco.der);
+                    return;
                 }
+                //console write datos del nodo actual
+                AyudantePreorden(nodo.NodoIzquierdo);
+                AyudantePreorden(nodo.NodoDerecho);
             }
-
-            public void ImprimirPre()
+            public void RecorridoInorden()
             {
-                ImprimirPre(raiz);
-
-                //Console.WriteLine();
+                AyudanteInorden(raiz);
             }
-             string auxiliar;
-            private void ImprimirEntre(Nodo reco)
+            public void AyudanteInorden(Nodo nodo)
             {
-                if (reco != null)
+                if (nodo == null)
                 {
-                    ImprimirEntre(reco.izq);
-                // Console.Write(reco.info + " ");
-                    auxiliar += reco.info;
-                    ImprimirEntre(reco.der);
+                    return;
                 }
+               
+                AyudantePreorden(nodo.NodoIzquierdo);
+                //console write datos del nodo actual
+                AyudantePreorden(nodo.NodoDerecho);
             }
-
-            public void ImprimirEntre()
+            public void RecorridoPostorden()
             {
-                ImprimirEntre(raiz);
-                //Console.WriteLine();
+                AyudantePostorden(raiz);
             }
-
-
-            private void ImprimirPost(Nodo reco)
+            public void AyudantePostorden(Nodo nodo)
             {
-                if (reco != null)
+                if (nodo == null)
                 {
-                    ImprimirPost(reco.izq);
-                    ImprimirPost(reco.der);
-                auxiliar += reco.info;
-                // Console.Write(reco.info + " ");
-            }
-            }
-
-
-            public void ImprimirPost()
-            {
-                ImprimirPost(raiz);
-               // Console.WriteLine();
-            }
-
-            public string Main(string args)
-            {
-            if (args!=null)
-            {
-                
-                //abo.Insertar(100);
-                //abo.Insertar(50);
-                //abo.Insertar(25); 
-                //abo.Insertar(75);
-                //abo.Insertar(150);
-                for (int i = 0; i < args.Length; i++)
-                {
-
-
-                    Insertar(args.ToArray()[i]);
-                    //if (i==(args.Length-1)/2)
-                    //{
-                    //    Insertar(args.ToArray()[i]);
-                    //}
-                    //if (i%2==0)
-                    //{
-                    //    Insertar(args.ToArray()[i]);
-                    //}
-                    //if (i % 2 != 0)
-                    //{
-                    //    Insertar(args.ToArray()[i]);
-                    //}
-
-
+                    return;
                 }
-                //Console.WriteLine("Impresion preorden: ");
-                //abo.ImprimirPre();
-                // Console.WriteLine("Impresion entreorden: ");
-                ImprimirPre();
-                
-                //Console.WriteLine("Impresion postorden: ");
-                //abo.ImprimirPost();
-                //Console.ReadKey(); 
+
+                AyudantePreorden(nodo.NodoIzquierdo);
+               
+                AyudantePreorden(nodo.NodoDerecho);
+
+                //console write datos del nodo actual
             }
-            return auxiliar;
         }
         
-
-
-
-
-
-
+     
     }
 }
