@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace AnalizadorLexicoAtomatas.Models
 {
     //******Esta clase no se utiliza*******
-    public class AnalizadorSemantico
+    public class GrammerSintactico
     {
         /*
        1. Funciones aritméticas

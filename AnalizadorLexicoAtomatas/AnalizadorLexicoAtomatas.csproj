@@ -83,7 +83,7 @@
     <Compile Include="Models\AnalizadorInterpreteLexico.cs" />
     <Compile Include="Models\AnalizadorLexico.cs" />
     <Compile Include="Models\AnalizadorResultado.cs" />
-    <Compile Include="Models\AnalizadorSemantico.cs" />
+    <Compile Include="Models\GrammerSintactico.cs" />
     <Compile Include="Models\AnalizadorSintactico2.cs" />
     <Compile Include="Models\ArbolBinario.cs" />
     <Compile Include="Models\Compilador.cs" />
