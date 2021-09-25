@@ -275,7 +275,7 @@ namespace AnalizadorLexicoAtomatas.Model
                 // se termina la sentencia para las funciones aritméticas
                 if (array[i] == ';')
                 {
-                    ListaIdent.Add(new EstructuraLexica { Token = "Ent. Terminal", Lexema = ";", Definicion = "SÍMBOLO TERMINAL", Sintaxis = "FUN(N,N);", Ejemplo = "FUN(4,2);", Linea = lineas + 1 });
+                    ListaIdent.Add(new EstructuraLexica { Token = "Fin de la sentencia", Lexema = ";", Definicion = "SÍMBOLO", Sintaxis = "FUN(N,N);", Ejemplo = "FUN(4,2);", Linea = lineas + 1 });
                     Extring = "";
                 }
 

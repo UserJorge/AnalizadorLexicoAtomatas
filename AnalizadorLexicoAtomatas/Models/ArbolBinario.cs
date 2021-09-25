@@ -13,17 +13,17 @@ namespace AnalizadorLexicoAtomatas.Models
         //Puede ocasinarse un OutOfMemoryException
         public class Nodo
         {
-            private object datos;
+            private IComparable datos;
 
             private Nodo nodoIzquierdo;
 
             private Nodo nodoDerecho;
-            public object Datos
+            public IComparable Datos
             {
                 get { return datos; }
                 set { datos = value; }
             }
-            public Nodo(object dato)
+            public Nodo(IComparable dato)
             {
                 nodoIzquierdo = nodoDerecho = null;
             }
@@ -37,11 +37,34 @@ namespace AnalizadorLexicoAtomatas.Models
                 get { return nodoIzquierdo; }
                 set { nodoIzquierdo = value; }
             }
-            public void Insertar(object valorDeInsercion)
+            public void Insertar(IComparable valorDeInsercion)
             {
                 //vamos a ver si hay que transformarlo a double, float o int según corresponda (como venía declarado)
                 //y el segundo paso es el recorrido del arbol si hay un double y
                 //un int convertimos el int en double para poder hacer la operación
+                if (valorDeInsercion.CompareTo(datos)<0)
+                {
+                    if (nodoIzquierdo==null)
+                    {
+                        nodoIzquierdo = new Nodo(valorDeInsercion);
+                    }
+                    else
+                    {
+                        nodoIzquierdo.Insertar(valorDeInsercion);
+                    }
+                } 
+                else if (valorDeInsercion.CompareTo(datos) > 0)
+                {
+                    if (nodoIzquierdo == null)
+                    {
+                        nodoDerecho = new Nodo(valorDeInsercion);
+                    }
+                    else
+                    {
+                        nodoDerecho.Insertar(valorDeInsercion);
+                    }
+                }
+
 
             }
         }
@@ -52,7 +75,7 @@ namespace AnalizadorLexicoAtomatas.Models
             {
                 raiz = null;
             }
-            public void InsertarNodo(object numero)
+            public void InsertarNodo(IComparable numero)
             {
                 if (raiz == null)
                 {
@@ -68,11 +91,13 @@ namespace AnalizadorLexicoAtomatas.Models
             }
             public void AyudantePreorden(Nodo nodo)
             {
-                if (nodo==null)
+                if (nodo==null) 
                 {
                     return;
                 }
+                //return nodo.Datos;
                 //console write datos del nodo actual
+                Imprimir(nodo);
                 AyudantePreorden(nodo.NodoIzquierdo);
                 AyudantePreorden(nodo.NodoDerecho);
             }
@@ -89,6 +114,7 @@ namespace AnalizadorLexicoAtomatas.Models
                
                 AyudantePreorden(nodo.NodoIzquierdo);
                 //console write datos del nodo actual
+                Imprimir(nodo);
                 AyudantePreorden(nodo.NodoDerecho);
             }
             public void RecorridoPostorden()
@@ -102,11 +128,14 @@ namespace AnalizadorLexicoAtomatas.Models
                     return;
                 }
 
-                AyudantePreorden(nodo.NodoIzquierdo);
-               
+                AyudantePreorden(nodo.NodoIzquierdo);     
                 AyudantePreorden(nodo.NodoDerecho);
-
+                Imprimir(nodo);
                 //console write datos del nodo actual
+            }
+            public IComparable Imprimir(Nodo nodo)
+            {
+                return nodo.Datos;
             }
         }
         

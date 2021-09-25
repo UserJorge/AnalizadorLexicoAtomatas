@@ -23,6 +23,15 @@ namespace AnalizadorLexicoAtomatas.ViewModels
         //implementación de la interfaz INotifyPropertyChanged
         public event PropertyChangedEventHandler PropertyChanged;
 
+        public ICommand LexicoCommand
+        {
+            get; set;
+        }
+        public ICommand CompilarCommand
+        {
+            get; set;
+        }
+
         //si se genera algún error en la compilación o un aviso de alguna excepción
         private string error;
 
@@ -57,14 +66,7 @@ namespace AnalizadorLexicoAtomatas.ViewModels
             set { estructuraResultados = value; PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("EstructuraResultados")); }
         }
 
-        public ICommand LexicoCommand
-        {
-            get;set;
-        }
-        public ICommand CompilarCommand
-        {
-            get;set;
-        }
+      
 
         public CompiladorViewModel()
         {

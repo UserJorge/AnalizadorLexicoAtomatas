@@ -26,7 +26,7 @@ namespace AnalizadorLexicoAtomatas.Models
             this.tipo = tipo;
             this.linea = linea;
             this.idTk = idTk;
-            this.Regla1 = Regla;
+            this.Regla1 = Regla; //el símbolo que se recogió del código fuente
             this.Descripcion1 = Descripcion;
         }
 
@@ -38,7 +38,6 @@ namespace AnalizadorLexicoAtomatas.Models
         public string Descripcion1 { get => Descripcion; set => Descripcion = value; }
     }
 }
-
 
 /////Constructor_Tsimbolos
 

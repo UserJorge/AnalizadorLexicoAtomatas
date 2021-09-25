@@ -60,7 +60,8 @@ namespace AnalizadorLexicoAtomatas.Models
         }
 
 
-        //El método de sintaxis check recibe una lista del tipo EstructuraLexica
+        //El método de sintaxis check recibe una lista del tipo EstructuraLexica para verificar y hacer las operaciones necesarias
+        //para compilar los valores y dar un resultado al planteamiento.
         List<AnalizadorResultado> Estructuras;
         public List<AnalizadorResultado> SintaxisCheck(List<EstructuraLexica> estructuras)
         {
@@ -326,6 +327,7 @@ namespace AnalizadorLexicoAtomatas.Models
         static double Evaluar(string expresion)
         {
             DataTable table = new DataTable();
+            
             object resultado = table.Compute(expresion, String.Empty);
             return Convert.ToDouble(resultado);
 

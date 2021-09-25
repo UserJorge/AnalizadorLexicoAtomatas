@@ -31,9 +31,9 @@ namespace AnalizadorLexicoAtomatas.Models
             tSimbolos.Add(tk5);
             TablaDeSimbolos tk6 = new TablaDeSimbolos(6, "INT", "TIY", "Número entero");
             tSimbolos.Add(tk6);
-            TablaDeSimbolos tk7 = new TablaDeSimbolos(7, "DOUBLE", "TIY", " Número con decimales");
+            TablaDeSimbolos tk7 = new TablaDeSimbolos(7, "DOU", "TIY", " Número con decimales");
             tSimbolos.Add(tk7);
-            TablaDeSimbolos tk8 = new TablaDeSimbolos(8, "STRING", "TIY", " Cadena de caracteres");
+            TablaDeSimbolos tk8 = new TablaDeSimbolos(8, "FLOAT", "TIY", " Número punto flotante");
             tSimbolos.Add(tk8);
             TablaDeSimbolos tk9 = new TablaDeSimbolos(9, "BOOL", "TIY", " Booleano true or false");
             tSimbolos.Add(tk9);
