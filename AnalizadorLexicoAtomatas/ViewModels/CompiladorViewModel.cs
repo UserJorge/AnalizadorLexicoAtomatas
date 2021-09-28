@@ -31,7 +31,10 @@ namespace AnalizadorLexicoAtomatas.ViewModels
         {
             get; set;
         }
-
+        public ICommand AnalisisCommand
+        {
+            get; set;
+        }
         //si se genera algún error en la compilación o un aviso de alguna excepción
         private string error;
 
@@ -74,7 +77,15 @@ namespace AnalizadorLexicoAtomatas.ViewModels
             //la interfaz ICommand hace esto posible
             LexicoCommand=new RelayCommand(Lexico);
             CompilarCommand = new RelayCommand(Compilar);
+            AnalisisCommand = new RelayCommand(Analizar);
             
+        }
+        //aquí se llaman los dos clases sintáctica-semántica
+        GrammerSintactico gramatica = new GrammerSintactico();
+        public void Analizar()
+        {
+            gramatica.SequenceCheck(EstructuraSave);
+
         }
         AnalizadorLexico analiza;
 

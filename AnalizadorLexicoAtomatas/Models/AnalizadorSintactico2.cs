@@ -198,6 +198,7 @@ namespace AnalizadorLexicoAtomatas.Models
                     }
 
                 }
+                //control del flujo de colocación del número utilizando auxiliares
                 if (Regex.IsMatch(palabra, @"^[')']\d$"))
                 {
                     for (int k = 0; k < palabra.Length; k++)

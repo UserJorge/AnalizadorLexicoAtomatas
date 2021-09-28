@@ -79,6 +79,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Models\AnalizadorSemanticoCS.cs" />
     <Compile Include="ViewModels\CompiladorViewModel.cs" />
     <Compile Include="Models\AnalizadorInterpreteLexico.cs" />
     <Compile Include="Models\AnalizadorLexico.cs" />
