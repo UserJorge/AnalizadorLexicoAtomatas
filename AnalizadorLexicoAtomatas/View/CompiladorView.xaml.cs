@@ -22,6 +22,8 @@ namespace AnalizadorLexicoAtomatas.View
         public CompiladorView()
         {
             InitializeComponent();
+            btnAnalisis.IsEnabled = false;
+            btnCompilar.IsEnabled = false;
         }
 
         //Metodo para scroll de ambos textbox y numeracion
@@ -39,6 +41,12 @@ namespace AnalizadorLexicoAtomatas.View
             for (var i = 1; i <= linIzq; i++)
                 // Indentar el texto a la derecha 
                 txtLines.Text += i.ToString("0").PadLeft(4) + "\r";
+        }
+
+        private void btnLexico_Click(object sender, RoutedEventArgs e)
+        {
+            btnAnalisis.IsEnabled = true;
+            btnCompilar.IsEnabled = true;
         }
     }
 }

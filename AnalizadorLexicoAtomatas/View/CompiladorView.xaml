@@ -127,7 +127,7 @@
                             </DataGrid.BitmapEffect>
                         </DataGrid>
                     </DockPanel>
-                    <Button Grid.Row="0" Background="Transparent" BorderThickness="2" BorderBrush="#72c9c0" Content="Léxico" Command="{Binding LexicoCommand}" VerticalAlignment="Top"  Grid.ColumnSpan="2" >
+                    <Button Grid.Row="0" Background="Transparent" BorderThickness="2" BorderBrush="#72c9c0" Content="Léxico" Command="{Binding LexicoCommand}" VerticalAlignment="Top"  Grid.ColumnSpan="2" x:Name="btnLexico" Click="btnLexico_Click">
                         <Button.BitmapEffect>
                             <DropShadowBitmapEffect Color="Black"></DropShadowBitmapEffect>
                         </Button.BitmapEffect>
@@ -138,7 +138,7 @@
                         </Button.Resources>
                     </Button>
                     <Button Grid.Row="2" Background="Transparent" Content="Compilar" 
-                             Command="{Binding CompilarCommand}" VerticalAlignment="Top"  Grid.ColumnSpan="2" BorderBrush="#a22771" Foreground="White">
+                             Command="{Binding CompilarCommand}" VerticalAlignment="Top"  Grid.ColumnSpan="2" BorderBrush="#a22771" Foreground="White" x:Name="btnCompilar">
 
                         <Button.BitmapEffect>
                             <DropShadowBitmapEffect Color="#a22771"></DropShadowBitmapEffect>
@@ -151,7 +151,7 @@
                             </Style>
                         </Button.Resources>
                     </Button>
-                    <Button Grid.Row="1" Background="Transparent" BorderBrush="#45a6c7" Content="Análisis"  VerticalAlignment="Top" Grid.ColumnSpan="2" Command="{Binding AnalisisCommand}">
+                    <Button Grid.Row="1" Background="Transparent" BorderBrush="#45a6c7" Content="Análisis"  VerticalAlignment="Top" Grid.ColumnSpan="2" Command="{Binding AnalisisCommand}" x:Name="btnAnalisis">
                         <Button.BitmapEffect>
                             <DropShadowBitmapEffect Color="Black"></DropShadowBitmapEffect>
 
@@ -166,7 +166,7 @@
                 </Grid>
                 <DockPanel  Grid.Row="0" Grid.Column="3" >
                     <TextBlock DockPanel.Dock="Top" FontSize="15">Sintáctica-Semántica</TextBlock>
-                    <DataGrid  ></DataGrid>
+                    <DataGrid ItemsSource="{Binding listaSemantica}" ></DataGrid>
                 </DockPanel>
                 <DockPanel  Grid.Row="0" Grid.Column="1" >
                     <TextBlock DockPanel.Dock="Top" FontSize="15">Analizador General</TextBlock>

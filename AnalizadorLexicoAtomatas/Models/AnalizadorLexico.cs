@@ -71,7 +71,7 @@ namespace AnalizadorLexicoAtomatas.Model
                 //{
                 if ((Regex.IsMatch(array[i].ToString(), @"\S")))
                 {
-                    Extring += array[i].ToString();
+                    Extring += array[i].ToString(); 
                 }
                 if ((Regex.IsMatch(array[i].ToString(), @"\r")))
                 {
@@ -234,7 +234,7 @@ namespace AnalizadorLexicoAtomatas.Model
                 }
                 else if (i == 3 && !Regex.IsMatch(array[i].ToString(), @"^(\x28)$") && ListaIdent.ToArray()[0].Lexema != "INT" && ListaIdent.ToArray()[0].Lexema != "FLT" && ListaIdent.ToArray()[0].Lexema != "IF" && ListaIdent.ToArray()[0].Lexema != "DOU")
                 {
-                    throw new ArgumentException("Error en el paréntesis apertura");
+                    throw new ArgumentException("Error en el paréntesis apertura"+"Línea: "+lineas+1);
                 }
 
 
@@ -270,7 +270,7 @@ namespace AnalizadorLexicoAtomatas.Model
                 //identificar solamente si no hay un paréntesis de clausura
                 else if (i == Auxiliar.Length - 2 && !Regex.IsMatch(array[Auxiliar.Length - 2].ToString(), @"^(\x29)$") && !Regex.IsMatch(Auxiliar, @"(\d{1,1}\x2E\d{1,1})F") && !(ListaIdent.ToArray()[0].Lexema == "INT") && !(ListaIdent.ToArray()[0].Lexema == "IF")&& !(ListaIdent.ToArray()[0].Lexema == "DOU" && !(ListaIdent.ToArray()[0].Lexema == "FLT")))
                 {
-                    throw new ArgumentException("Error en el paréntesis de clausura");
+                    throw new ArgumentException("Error en el paréntesis de clausura"+" Línea "+lineas+1);
                 }
                 // se termina la sentencia para las funciones aritméticas
                 if (array[i] == ';')

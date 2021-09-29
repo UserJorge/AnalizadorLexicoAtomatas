@@ -19,7 +19,7 @@ namespace AnalizadorLexicoAtomatas.ViewModels
         public ObservableCollection<EstructuraLexica> lista { get; set; } = new ObservableCollection<EstructuraLexica>();
         //Esta es la lista de cada uno de los resultados que salen de la ejecución del código
         public ObservableCollection<AnalizadorResultado> listaCompilador { get; set; } = new ObservableCollection<AnalizadorResultado>();
-       
+        public ObservableCollection<ResultadoSemantico> listaSemantica { get; set; } = new ObservableCollection<ResultadoSemantico>();
         //implementación de la interfaz INotifyPropertyChanged
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -68,8 +68,11 @@ namespace AnalizadorLexicoAtomatas.ViewModels
             get { return estructuraResultados; }
             set { estructuraResultados = value; PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("EstructuraResultados")); }
         }
+     
 
-      
+   
+
+
 
         public CompiladorViewModel()
         {
@@ -84,13 +87,18 @@ namespace AnalizadorLexicoAtomatas.ViewModels
         GrammerSintactico gramatica = new GrammerSintactico();
         public void Analizar()
         {
-            gramatica.SequenceCheck(EstructuraSave);
+            foreach (var item in gramatica.SequenceCheck(EstructuraSave))
+            {
+                listaSemantica.Add(item);
+            }
+          
 
         }
         AnalizadorLexico analiza;
 
         public void Lexico()
         {
+            listaSemantica.Clear();
             Error = "";
             try
             {
@@ -141,7 +149,7 @@ namespace AnalizadorLexicoAtomatas.ViewModels
             //    }
 
             //se ejecuta la parte del proceso de identificar cada lexema (analizador léxico)
-            Lexico();
+            //Lexico();
             //se crea un objeto *borrar esta parte hasta saber que hacer con ella**
             comp = new Compilador();
             //objeto del tipo AnalizadorSintactico2

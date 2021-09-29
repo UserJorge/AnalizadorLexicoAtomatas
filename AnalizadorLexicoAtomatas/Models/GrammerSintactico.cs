@@ -135,11 +135,13 @@ namespace AnalizadorLexicoAtomatas.Models
 
 
         string palabra;
-        List<EstructuraLexica> lexemasSecuencia;
+        List<EstructuraLexica> lexemasSecuencia = new List<EstructuraLexica>();
+        List<ResultadoSemantico> listaSemantica = new List<ResultadoSemantico>();
         ArbolBinario.Arbol arbol = new ArbolBinario.Arbol();
-        public void SequenceCheck(List<EstructuraLexica> secuenciaTokens)
+        public List<ResultadoSemantico> SequenceCheck(List<EstructuraLexica> secuenciaTokens)
         {
-            lexemasSecuencia = new List<EstructuraLexica>();
+             
+            
             //verificar una función aritmética
             Regex mFUN = new Regex(@"^[A-Z]{3,3}\((\d+\.?\d*(D?|F?)|[A-Z]{3,3}\(\d+\.?\d*(D?|F?)\,\d+\.?\d*(D?|F?)\))\,(\d+\.?\d*(D?|F?)|[A-Z]{3,3}\(\d+\.?\d*(D?|F?)\,\d+\.?\d*(D?|F?)\))\)\;$");
             //*verificar una asignación simple
@@ -170,37 +172,44 @@ namespace AnalizadorLexicoAtomatas.Models
                     PalabraFUN.Add(palabra);
                     palabra = "";
                     lexemasSecuencia.Clear();
+                    listaSemantica.Add(new ResultadoSemantico() {Estado="<FUN>",Detalle="Declaración de una función" });
                     break;
                 case var vv when mASI.IsMatch(palabra):
                     PalabraASI.Add(palabra);
                     palabra = "";
                     lexemasSecuencia.Clear();
+                    listaSemantica.Add(new ResultadoSemantico() { Estado = "<ASI>", Detalle = "Declaración de una asignación" });
                     break;
                 case var vv when mASIFUN.IsMatch(palabra):
                     PalabraASIFUN.Add(palabra);
                     palabra = "";
                     lexemasSecuencia.Clear();
+                    listaSemantica.Add(new ResultadoSemantico() { Estado = "<ASI>:=<FUN>", Detalle = "Declara una variable y se asigna <FUN>" });
                     break;
                 case var vv when mCONV.IsMatch(palabra):
                     PalabraCONV.Add(palabra);
                     palabra = "";
                     lexemasSecuencia.Clear();
+                    listaSemantica.Add(new ResultadoSemantico() { Estado = "<CONV>", Detalle = "Declara una variable y se asigna una conversión" });
                     break;
                 case var vv when mDECL.IsMatch(palabra):
                     PalabraDECL.Add(palabra);
                     palabra = "";
                     lexemasSecuencia.Clear();
+                    listaSemantica.Add(new ResultadoSemantico() { Estado = "<DECL>", Detalle = "Declaración simple" });
                     break;
                 case var vv when mIF.IsMatch(palabra):
                     PalabraIF.Add(palabra);
                     palabra = "";
                     lexemasSecuencia.Clear();
+                    listaSemantica.Add(new ResultadoSemantico() { Estado = "<IF>", Detalle = "Declara un control de flujo condicional" });
                     break;
                 default:
                     //throw new ArgumentException("Ocurrió una excepción en el análisis sintáctico línea: " + lexemasSecuencia.ToArray()[1].Linea.ToString() + VerificacionExterna(palabra, lexemasSecuencia));
                     break;
 
             }
+            return listaSemantica;
 
         } 
         //Gestión de errores sintácticos
